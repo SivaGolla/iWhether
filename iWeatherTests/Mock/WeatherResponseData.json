@@ -1,0 +1,101 @@
+{
+  "lat": 37.7749,
+  "lon": -122.4194,
+  "timezone": "America/Los_Angeles",
+  "timezone_offset": -25200,
+  "current": {
+    "dt": 1605182400,
+    "sunrise": 1605161443,
+    "sunset": 1605198596,
+    "temp": 15.49,
+    "feels_like": 14.43,
+    "pressure": 1015,
+    "humidity": 77,
+    "dew_point": 11.48,
+    "uvi": 2.64,
+    "clouds": 90,
+    "visibility": 10000,
+    "wind_speed": 1.54,
+    "wind_deg": 180,
+    "weather": [
+      {
+        "id": 804,
+        "main": "Clouds",
+        "description": "overcast clouds",
+        "icon": "04d"
+      }
+    ]
+  },
+  "minutely": [
+    {
+      "dt": 1605182460,
+      "precipitation": 0
+    },
+    {
+      "dt": 1605182520,
+      "precipitation": 0
+    }
+  ],
+  "hourly": [
+    {
+      "dt": 1605182400,
+      "temp": 15.49,
+      "feels_like": 14.43,
+      "pressure": 1015,
+      "humidity": 77,
+      "dew_point": 11.48,
+      "uvi": 2.64,
+      "clouds": 90,
+      "visibility": 10000,
+      "wind_speed": 1.54,
+      "wind_deg": 180,
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+        }
+      ],
+      "pop": 0.2
+    }
+  ],
+  "daily": [
+    {
+      "dt": 1605200400,
+      "sunrise": 1605161443,
+      "sunset": 1605198596,
+      "temp": {
+        "day": 15.49,
+        "min": 12.34,
+        "max": 18.93,
+        "night": 12.94,
+        "eve": 16.74,
+        "morn": 13.89
+      },
+      "feels_like": {
+        "day": 14.43,
+        "night": 12.23,
+        "eve": 15.43,
+        "morn": 13.12
+      },
+      "pressure": 1015,
+      "humidity": 77,
+      "dew_point": 11.48,
+      "wind_speed": 1.54,
+      "wind_deg": 180,
+      "weather": [
+        {
+          "id": 804,
+          "main": "Clouds",
+          "description": "overcast clouds",
+          "icon": "04d"
+        }
+      ],
+      "clouds": 90,
+      "pop": 0.2,
+      "uvi": 2.64
+    }
+  ]
+}
+

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import iWeather
+@testable import iWeather_Dev
 
 final class iWeatherTests: XCTestCase {
 
