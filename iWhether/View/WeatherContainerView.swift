@@ -21,8 +21,8 @@ struct WeatherContainerView: View {
             HourlyForecastView(viewModel: viewModel)
                 .padding(.horizontal)
             
-//            DailyWeatherView(weatherViewModel: weatherViewModel)
-//                .padding(.horizontal)
+            DailyForecastView(viewModel: viewModel)
+                .padding(.horizontal)
         }
     }
 }
