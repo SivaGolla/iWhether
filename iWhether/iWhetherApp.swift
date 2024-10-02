@@ -1,6 +1,6 @@
 //
-//  iWhetherApp.swift
-//  iWhether
+//  iWeatherApp.swift
+//  iWeather
 //
 //  Created by Venkata Sivannarayana Golla on 01/10/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct iWhetherApp: App {
+struct iWeatherApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

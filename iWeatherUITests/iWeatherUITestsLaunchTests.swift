@@ -1,13 +1,13 @@
 //
-//  iWhetherUITestsLaunchTests.swift
-//  iWhetherUITests
+//  iWeatherUITestsLaunchTests.swift
+//  iWeatherUITests
 //
 //  Created by Venkata Sivannarayana Golla on 01/10/24.
 //
 
 import XCTest
 
-final class iWhetherUITestsLaunchTests: XCTestCase {
+final class iWeatherUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

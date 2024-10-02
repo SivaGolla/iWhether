@@ -1,14 +1,14 @@
 //
-//  iWhetherTests.swift
-//  iWhetherTests
+//  iWeatherTests.swift
+//  iWeatherTests
 //
 //  Created by Venkata Sivannarayana Golla on 01/10/24.
 //
 
 import XCTest
-@testable import iWhether
+@testable import iWeather
 
-final class iWhetherTests: XCTestCase {
+final class iWeatherTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
