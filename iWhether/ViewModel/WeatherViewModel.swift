@@ -11,9 +11,23 @@ import SwiftUI
 
 final class WeatherViewModel: ObservableObject {
     @Published var weather: WeatherResponse = WeatherResponse()
+    @Published var city = Constants.city {
+        didSet {
+            getLocation()
+        }
+    }
+
+    init() {
+        getLocation()
+    }
 }
 
 extension WeatherViewModel {
+    private var todayForecast: WeatherDaily? {
+        let date = weather.current.date
+        return weather.daily.first { $0.date == date }
+    }
+    
     var date: String {
         return DateFormatter.wDefault.string(from: Date(timeIntervalSince1970: weather.current.date))
     }
@@ -25,7 +39,19 @@ extension WeatherViewModel {
     var temperature: String {
         return getTempFor(weather.current.temperature)
     }
+    
+    var currentMinTemp: Double? {
+        return todayForecast?.temperature.min
+    }
+    
+    var currentMaxTemp: Double? {
+        return todayForecast?.temperature.max
+    }
 
+    var feelsLike: String {
+        return getTempFor(weather.current.feelsLike)
+    }
+    
     var conditions: String {
         return weather.current.weather.first?.main ?? ""
     }
@@ -42,15 +68,15 @@ extension WeatherViewModel {
         return String(format: "%0.1f%%", weather.current.dewPoint)
     }
 
-    func getTimeFor(_ temp: Int) -> String {
+    func getTimeFor(_ temp: Double) -> String {
         return DateFormatter.wTime.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
     }
 
-    func getDayFor(_ temp: Int) -> String {
+    func getDayFor(_ temp: Double) -> String {
         return DateFormatter.wDay.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
     }
     
-    func getDayNumber(_ temp: Int) -> String {
+    func getDayNumber(_ temp: Double) -> String {
         return DateFormatter.wDateValue.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
     }
 

@@ -77,7 +77,7 @@ struct WeatherDetail: Codable, Identifiable {
 }
 
 struct WeatherDaily: Codable, Identifiable {
-    var date: Int
+    var date: Double
     var temperature: Temperature
     var weather: [WeatherDetail]
     var id: UUID {

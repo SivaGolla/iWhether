@@ -30,6 +30,12 @@
 		A15AB6E12CAD7683002B51C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1BECA5D2CAC9DF700C34018 /* Preview Assets.xcassets */; };
 		A15AB6E22CAD7683002B51C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1BECA5A2CAC9DF700C34018 /* Assets.xcassets */; };
 		A15AB6E72CAD76B4002B51C5 /* WeatherResponseData.json in Resources */ = {isa = PBXBuildFile; fileRef = A1BECAA72CAD707B00C34018 /* WeatherResponseData.json */; };
+		A15AB6ED2CAD8E43002B51C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6EC2CAD8E43002B51C5 /* Constants.swift */; };
+		A15AB6EE2CAD8E43002B51C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6EC2CAD8E43002B51C5 /* Constants.swift */; };
+		A15AB6F02CAD8EAF002B51C5 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6EF2CAD8EAF002B51C5 /* HourlyForecastView.swift */; };
+		A15AB6F12CAD8EAF002B51C5 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6EF2CAD8EAF002B51C5 /* HourlyForecastView.swift */; };
+		A15AB6F32CAD8F0F002B51C5 /* HourlyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6F22CAD8F0F002B51C5 /* HourlyCellView.swift */; };
+		A15AB6F42CAD8F0F002B51C5 /* HourlyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15AB6F22CAD8F0F002B51C5 /* HourlyCellView.swift */; };
 		A1BECA572CAC9DF500C34018 /* iWhetherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA562CAC9DF500C34018 /* iWhetherApp.swift */; };
 		A1BECA592CAC9DF500C34018 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA582CAC9DF500C34018 /* ContentView.swift */; };
 		A1BECA5B2CAC9DF700C34018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1BECA5A2CAC9DF700C34018 /* Assets.xcassets */; };
@@ -89,6 +95,9 @@
 /* Begin PBXFileReference section */
 		A15AB6C82CAD7530002B51C5 /* Image+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Custom.swift"; sourceTree = "<group>"; };
 		A15AB6E62CAD7683002B51C5 /* iWeather-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iWeather-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15AB6EC2CAD8E43002B51C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A15AB6EF2CAD8EAF002B51C5 /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
+		A15AB6F22CAD8F0F002B51C5 /* HourlyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCellView.swift; sourceTree = "<group>"; };
 		A1BECA532CAC9DF500C34018 /* iWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1BECA562CAC9DF500C34018 /* iWhetherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iWhetherApp.swift; sourceTree = "<group>"; };
 		A1BECA582CAC9DF500C34018 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -218,6 +227,8 @@
 				A1BECA582CAC9DF500C34018 /* ContentView.swift */,
 				A1BECA842CACA12300C34018 /* WeatherContainerView.swift */,
 				A1BECA8C2CACAC1C00C34018 /* CurrentConditionsView.swift */,
+				A15AB6EF2CAD8EAF002B51C5 /* HourlyForecastView.swift */,
+				A15AB6F22CAD8F0F002B51C5 /* HourlyCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -246,6 +257,7 @@
 				A1BECA8A2CACA90000C34018 /* Colors.swift */,
 				A1BECA902CAD3DB300C34018 /* DateFormatter+Custom.swift */,
 				A15AB6C82CAD7530002B51C5 /* Image+Custom.swift */,
+				A15AB6EC2CAD8E43002B51C5 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -434,7 +446,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A15AB6CC2CAD7683002B51C5 /* NetworkManager.swift in Sources */,
+				A15AB6F42CAD8F0F002B51C5 /* HourlyCellView.swift in Sources */,
 				A15AB6CD2CAD7683002B51C5 /* NetworkError.swift in Sources */,
+				A15AB6F12CAD8EAF002B51C5 /* HourlyForecastView.swift in Sources */,
 				A15AB6CE2CAD7683002B51C5 /* DateFormatter+Custom.swift in Sources */,
 				A15AB6CF2CAD7683002B51C5 /* CurrentConditionsView.swift in Sources */,
 				A15AB6D02CAD7683002B51C5 /* ServiceProviding.swift in Sources */,
@@ -448,6 +462,7 @@
 				A15AB6D82CAD7683002B51C5 /* URLSessionProtocol.swift in Sources */,
 				A15AB6D92CAD7683002B51C5 /* iWhetherApp.swift in Sources */,
 				A15AB6DA2CAD7683002B51C5 /* WeatherContainerView.swift in Sources */,
+				A15AB6EE2CAD8E43002B51C5 /* Constants.swift in Sources */,
 				A15AB6DB2CAD7683002B51C5 /* WeatherService.swift in Sources */,
 				A15AB6DC2CAD7683002B51C5 /* WeatherResponse.swift in Sources */,
 				A15AB6DD2CAD7683002B51C5 /* Image+Custom.swift in Sources */,
@@ -460,7 +475,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1BECA982CAD5CE600C34018 /* NetworkManager.swift in Sources */,
+				A15AB6F32CAD8F0F002B51C5 /* HourlyCellView.swift in Sources */,
 				A1BECA9C2CAD5D2300C34018 /* NetworkError.swift in Sources */,
+				A15AB6F02CAD8EAF002B51C5 /* HourlyForecastView.swift in Sources */,
 				A1BECA912CAD3DB300C34018 /* DateFormatter+Custom.swift in Sources */,
 				A1BECA8D2CACAC1C00C34018 /* CurrentConditionsView.swift in Sources */,
 				A1BECAA02CAD5D5B00C34018 /* ServiceProviding.swift in Sources */,
@@ -474,6 +491,7 @@
 				A1BECA9A2CAD5D0E00C34018 /* URLSessionProtocol.swift in Sources */,
 				A1BECA572CAC9DF500C34018 /* iWhetherApp.swift in Sources */,
 				A1BECA852CACA12300C34018 /* WeatherContainerView.swift in Sources */,
+				A15AB6ED2CAD8E43002B51C5 /* Constants.swift in Sources */,
 				A1BECAA22CAD5DA400C34018 /* WeatherService.swift in Sources */,
 				A1BECA8F2CAD3B0E00C34018 /* WeatherResponse.swift in Sources */,
 				A15AB6C92CAD7530002B51C5 /* Image+Custom.swift in Sources */,

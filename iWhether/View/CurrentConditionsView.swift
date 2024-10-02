@@ -9,9 +9,10 @@ import SwiftUI
 
 struct CurrentConditionsView: View {
     var cityName: String
-    var temperature: Double
-    var feelsLike: Double
-    var condition: String
+    var temperature: String
+    var feelsLike: String
+    var minTemp: Double
+    var maxTemp: Double
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -27,14 +28,21 @@ struct CurrentConditionsView: View {
                 .font(.title)
                 .foregroundColor(.gray)
             
-            Text(condition)
-                .font(.title)
-                .foregroundColor(.gray)
+            HStack(spacing: 16) {
+                Text("\(minTemp)°")
+                    .font(.title)
+                    .foregroundColor(.gray)
+                
+                Text("\(maxTemp)°")
+                    .font(.title)
+                    .foregroundColor(.gray)
+            }
+            
         }
         .padding()
     }
 }
 
 #Preview {
-    CurrentConditionsView(cityName: "Reading", temperature: 13.0, feelsLike: 8.0, condition: "Cloudy")
+    CurrentConditionsView(cityName: "Reading", temperature: "13.0", feelsLike: "8.0", minTemp: 5.0, maxTemp: 15.0)
 }

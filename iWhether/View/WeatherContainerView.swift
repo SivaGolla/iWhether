@@ -12,10 +12,15 @@ struct WeatherContainerView: View {
     
     var body: some View {
         VStack {
-            CurrentConditionsView(cityName: "", temperature: 13.0, feelsLike: 8.0, condition: "Cloudy")
+            CurrentConditionsView(cityName: viewModel.city,
+                                  temperature: viewModel.date,
+                                  feelsLike: viewModel.feelsLike,
+                                  minTemp: viewModel.currentMinTemp ?? 0,
+                                  maxTemp: viewModel.currentMaxTemp ?? 0)
                 .padding()
-//            HourlyView(weatherViewModel: weatherViewModel)
-//                .padding(.horizontal)
+            HourlyForecastView(viewModel: viewModel)
+                .padding(.horizontal)
+            
 //            DailyWeatherView(weatherViewModel: weatherViewModel)
 //                .padding(.horizontal)
         }
