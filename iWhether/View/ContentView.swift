@@ -19,7 +19,7 @@ struct ContentView: View {
                         .environmentObject(weatherViewModel)
                 }
             }
-            .background(Colors.meduimBlueColor)
+            .background(Color.meduimBlueColor)
         }
         .onAppear {
             weatherViewModel.city = Constants.city

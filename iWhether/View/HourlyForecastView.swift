@@ -14,7 +14,7 @@ struct HourlyForecastView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 ForEach(viewModel.weather.hourly) { weather in
-                    let icon = viewModel.getWeatherIconFor(icon: weather.weather.first?.icon ?? "sun")
+                    let icon = Image((weather.weather.first?.icon ?? "sun").wIconName)
                     let hour = viewModel.getTimeFor(weather.date)
                     let temp = viewModel.getTempFor(weather.temperature)
                     
@@ -22,6 +22,8 @@ struct HourlyForecastView: View {
                 }
             }
         }
+        .background(Color.hourCellBg)
+        .cornerRadius(8.0)
     }
 }
 

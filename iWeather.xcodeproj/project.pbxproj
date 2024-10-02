@@ -15,7 +15,7 @@
 		A15AB6D02CAD7683002B51C5 /* ServiceProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA9F2CAD5D5B00C34018 /* ServiceProviding.swift */; };
 		A15AB6D12CAD7683002B51C5 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA882CACA1D800C34018 /* Spacing.swift */; };
 		A15AB6D22CAD7683002B51C5 /* WeatherRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECAA42CAD5E1000C34018 /* WeatherRequestModel.swift */; };
-		A15AB6D32CAD7683002B51C5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8A2CACA90000C34018 /* Colors.swift */; };
+		A15AB6D32CAD7683002B51C5 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8A2CACA90000C34018 /* Color+Custom.swift */; };
 		A15AB6D42CAD7683002B51C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA582CAC9DF500C34018 /* ContentView.swift */; };
 		A15AB6D52CAD7683002B51C5 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA9D2CAD5D3900C34018 /* Request.swift */; };
 		A15AB6D62CAD7683002B51C5 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA822CAC9F1600C34018 /* WeatherViewModel.swift */; };
@@ -50,7 +50,7 @@
 		A1BECA832CAC9F1600C34018 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA822CAC9F1600C34018 /* WeatherViewModel.swift */; };
 		A1BECA852CACA12300C34018 /* WeatherContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA842CACA12300C34018 /* WeatherContainerView.swift */; };
 		A1BECA892CACA1D800C34018 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA882CACA1D800C34018 /* Spacing.swift */; };
-		A1BECA8B2CACA90000C34018 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8A2CACA90000C34018 /* Colors.swift */; };
+		A1BECA8B2CACA90000C34018 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8A2CACA90000C34018 /* Color+Custom.swift */; };
 		A1BECA8D2CACAC1C00C34018 /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8C2CACAC1C00C34018 /* CurrentConditionsView.swift */; };
 		A1BECA8F2CAD3B0E00C34018 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA8E2CAD3B0E00C34018 /* WeatherResponse.swift */; };
 		A1BECA912CAD3DB300C34018 /* DateFormatter+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BECA902CAD3DB300C34018 /* DateFormatter+Custom.swift */; };
@@ -117,7 +117,7 @@
 		A1BECA822CAC9F1600C34018 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		A1BECA842CACA12300C34018 /* WeatherContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherContainerView.swift; sourceTree = "<group>"; };
 		A1BECA882CACA1D800C34018 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
-		A1BECA8A2CACA90000C34018 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		A1BECA8A2CACA90000C34018 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		A1BECA8C2CACAC1C00C34018 /* CurrentConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsView.swift; sourceTree = "<group>"; };
 		A1BECA8E2CAD3B0E00C34018 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		A1BECA902CAD3DB300C34018 /* DateFormatter+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Custom.swift"; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				A1BECA882CACA1D800C34018 /* Spacing.swift */,
-				A1BECA8A2CACA90000C34018 /* Colors.swift */,
+				A1BECA8A2CACA90000C34018 /* Color+Custom.swift */,
 				A1BECA902CAD3DB300C34018 /* DateFormatter+Custom.swift */,
 				A15AB6C82CAD7530002B51C5 /* Image+Custom.swift */,
 				A15AB6EC2CAD8E43002B51C5 /* Constants.swift */,
@@ -462,7 +462,7 @@
 				A15AB6D02CAD7683002B51C5 /* ServiceProviding.swift in Sources */,
 				A15AB6D12CAD7683002B51C5 /* Spacing.swift in Sources */,
 				A15AB6D22CAD7683002B51C5 /* WeatherRequestModel.swift in Sources */,
-				A15AB6D32CAD7683002B51C5 /* Colors.swift in Sources */,
+				A15AB6D32CAD7683002B51C5 /* Color+Custom.swift in Sources */,
 				A15AB6D42CAD7683002B51C5 /* ContentView.swift in Sources */,
 				A15AB6FA2CAD9404002B51C5 /* DailyForecastCellView.swift in Sources */,
 				A15AB6D52CAD7683002B51C5 /* Request.swift in Sources */,
@@ -493,7 +493,7 @@
 				A1BECAA02CAD5D5B00C34018 /* ServiceProviding.swift in Sources */,
 				A1BECA892CACA1D800C34018 /* Spacing.swift in Sources */,
 				A1BECAA52CAD5E1000C34018 /* WeatherRequestModel.swift in Sources */,
-				A1BECA8B2CACA90000C34018 /* Colors.swift in Sources */,
+				A1BECA8B2CACA90000C34018 /* Color+Custom.swift in Sources */,
 				A1BECA592CAC9DF500C34018 /* ContentView.swift in Sources */,
 				A15AB6F92CAD9404002B51C5 /* DailyForecastCellView.swift in Sources */,
 				A1BECA9E2CAD5D3900C34018 /* Request.swift in Sources */,

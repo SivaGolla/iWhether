@@ -19,7 +19,7 @@ struct DailyForecastCellView: View {
                 Text(viewModel.getDayNumber(weather.date))
             }
             Spacer()
-            viewModel.getWeatherIconFor(icon: weather.weather[0].icon)
+            Image(weather.weather[0].icon)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 30,

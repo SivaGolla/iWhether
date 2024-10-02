@@ -8,41 +8,37 @@
 import SwiftUI
 
 struct CurrentConditionsView: View {
-    var cityName: String
-    var temperature: String
-    var feelsLike: String
-    var minTemp: String
-    var maxTemp: String
+    @EnvironmentObject var viewModel: WeatherViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
-            Text(cityName)
+            Text(viewModel.city)
                 .font(.largeTitle)
                 .bold()
+                .foregroundColor(.white)
             
-            Text("\(temperature)°")
-                .font(.system(size: 70))
-                .bold()
+            Text("\(viewModel.temperature)°")
+                .font(.system(size: 80))
+                .foregroundColor(.white)
             
-            Text("Feels Like: \(feelsLike)")
-                .font(.title)
+            Text("Feels Like: \(viewModel.feelsLike)°")
+                .font(.title3)
                 .foregroundColor(.gray)
             
             HStack(spacing: 16) {
-                Text("\(minTemp)°")
-                    .font(.title)
-                    .foregroundColor(.gray)
+                Text("H: \(viewModel.currentMaxTemp)°")
+                    .font(.title2)
+                    .foregroundColor(.secondaryText)
                 
-                Text("\(maxTemp)°")
-                    .font(.title)
-                    .foregroundColor(.gray)
+                Text("L: \(viewModel.currentMinTemp)°")
+                    .font(.title2)
+                    .foregroundColor(Color.secondaryText)
             }
-            
         }
         .padding()
     }
 }
 
 #Preview {
-    CurrentConditionsView(cityName: "Reading", temperature: "13.0", feelsLike: "8.0", minTemp: "5.0", maxTemp: "15.0")
+    CurrentConditionsView()
 }
