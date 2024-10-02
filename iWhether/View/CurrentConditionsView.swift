@@ -11,8 +11,8 @@ struct CurrentConditionsView: View {
     var cityName: String
     var temperature: String
     var feelsLike: String
-    var minTemp: Double
-    var maxTemp: Double
+    var minTemp: String
+    var maxTemp: String
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -44,5 +44,5 @@ struct CurrentConditionsView: View {
 }
 
 #Preview {
-    CurrentConditionsView(cityName: "Reading", temperature: "13.0", feelsLike: "8.0", minTemp: 5.0, maxTemp: 15.0)
+    CurrentConditionsView(cityName: "Reading", temperature: "13.0", feelsLike: "8.0", minTemp: "5.0", maxTemp: "15.0")
 }

@@ -11,14 +11,10 @@ import SwiftUI
 
 final class WeatherViewModel: ObservableObject {
     @Published var weather: WeatherResponse = WeatherResponse()
-    @Published var city = Constants.city {
+    var city = Constants.city {
         didSet {
             getLocation()
         }
-    }
-
-    init() {
-        getLocation()
     }
 }
 
@@ -40,12 +36,12 @@ extension WeatherViewModel {
         return getTempFor(weather.current.temperature)
     }
     
-    var currentMinTemp: Double? {
-        return todayForecast?.temperature.min
+    var currentMinTemp: String {
+        return getTempFor(todayForecast?.temperature.min ?? 0)
     }
     
-    var currentMaxTemp: Double? {
-        return todayForecast?.temperature.max
+    var currentMaxTemp: String {
+        return getTempFor(todayForecast?.temperature.max ?? 0)
     }
 
     var feelsLike: String {

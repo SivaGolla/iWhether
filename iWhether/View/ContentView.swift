@@ -14,11 +14,15 @@ struct ContentView: View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
                 ScrollView(showsIndicators: false) {
-                    WeatherContainerView(viewModel: weatherViewModel)
+                    WeatherContainerView()
                         .padding(.top, Spacing.defaultPadding)
+                        .environmentObject(weatherViewModel)
                 }
             }
             .background(Colors.meduimBlueColor)
+        }
+        .onAppear {
+            weatherViewModel.city = Constants.city
         }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DailyForecastView: View {
-    @ObservedObject var viewModel: WeatherViewModel
+    @EnvironmentObject var viewModel: WeatherViewModel
     
     var body: some View {
         ForEach(viewModel.weather.daily) { weather in
@@ -20,5 +20,5 @@ struct DailyForecastView: View {
 }
 
 #Preview {
-    DailyForecastView(viewModel: WeatherViewModel())
+    DailyForecastView()
 }

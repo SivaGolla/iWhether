@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct WeatherContainerView: View {
-    @ObservedObject var viewModel: WeatherViewModel
+    @EnvironmentObject var viewModel: WeatherViewModel
     
     var body: some View {
         VStack {
             CurrentConditionsView(cityName: viewModel.city,
-                                  temperature: viewModel.date,
+                                  temperature: viewModel.temperature,
                                   feelsLike: viewModel.feelsLike,
-                                  minTemp: viewModel.currentMinTemp ?? 0,
-                                  maxTemp: viewModel.currentMaxTemp ?? 0)
+                                  minTemp: viewModel.currentMinTemp,
+                                  maxTemp: viewModel.currentMaxTemp)
                 .padding()
-            HourlyForecastView(viewModel: viewModel)
+            HourlyForecastView()
                 .padding(.horizontal)
             
-            DailyForecastView(viewModel: viewModel)
+            DailyForecastView()
                 .padding(.horizontal)
         }
     }
 }
 
 #Preview {
-    WeatherContainerView(viewModel: WeatherViewModel())
+    WeatherContainerView()
 }
