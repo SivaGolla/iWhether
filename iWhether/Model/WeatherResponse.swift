@@ -49,7 +49,7 @@ struct Weather: Codable, Identifiable {
 
     init() {
         date = 0
-        temperature = 10.0
+        temperature = 11.0
         feelsLike = 0.0
         pressure = 0
         humidity = 0

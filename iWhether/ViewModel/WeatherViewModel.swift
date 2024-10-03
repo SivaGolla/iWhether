@@ -79,6 +79,10 @@ extension WeatherViewModel {
     func getTempFor(_ temp: Double) -> String {
         return String(format: "%1.0f", temp)
     }
+    
+    func weatherIconNameFor(weather: WeatherDaily) -> String {
+        return (weather.weather.first?.icon ?? "sun").wIconName
+    }
 }
 
 extension WeatherViewModel {

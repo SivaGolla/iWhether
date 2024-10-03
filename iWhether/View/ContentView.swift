@@ -18,6 +18,8 @@ struct ContentView: View {
                         .padding(.top, Spacing.defaultPadding)
                         .environmentObject(weatherViewModel)
                 }
+                .edgesIgnoringSafeArea(.all)
+                .padding(.top, 2)
             }
             .background(Color.meduimBlueColor)
         }

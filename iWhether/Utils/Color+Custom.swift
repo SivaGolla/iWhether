@@ -17,7 +17,7 @@ extension Color {
     static let secondaryText = Color(red: 194 / 255, green: 195 / 255, blue: 224 / 255)
     static let hourCellBg = Color(red: 40 / 255, green: 44 / 255, blue: 72 / 255)
     static let hourViewSeparator = Color(red: 62 / 255, green: 66 / 255, blue: 94 / 255)
-    static let gradient = [lightBlueColor.opacity(0.5), darkBlueColor.opacity(0.5)]
+    static let gradient = [hourCellBg.opacity(0.1), hourCellBg.opacity(0.5)]
     static let gradientAPP = [appUpMainColor, appDownMainColor]
     static let gradientSerchMenu = [appUpMainColor.opacity(0.5), appDownMainColor.opacity(0.5)]
 }

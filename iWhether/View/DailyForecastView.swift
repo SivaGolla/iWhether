@@ -28,8 +28,17 @@ struct DailyForecastView: View {
                 }
             }
         }
-        .background(Color.hourCellBg)
-        .cornerRadius(8.0)
+//        .background(Color.hourCellBg)
+//        .cornerRadius(8.0)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: Color.gradient),
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+        )
     }
 }
 
