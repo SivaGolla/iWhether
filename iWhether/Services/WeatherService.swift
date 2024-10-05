@@ -27,8 +27,8 @@ class WeatherService: ServiceProviding {
         var reqUrlPath = Environment.wForecast
         
         // Append query parameters to the base URL if they exist.
-        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{latitude}", with: urlSearchParams?.latitude ?? "51.4514278")
-        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{longitude}", with: urlSearchParams?.longitude ?? "-1.078448")
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{latitude}", with: urlSearchParams?.latitude ?? "\(Constants.defaultCoordinates.latitude)")
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{longitude}", with: urlSearchParams?.longitude ?? "\(Constants.defaultCoordinates.longitude)")
         reqUrlPath = reqUrlPath.replacingOccurrences(of: "{excludeFields}", with: urlSearchParams?.excludeFields ?? "minutely")
         reqUrlPath = reqUrlPath.replacingOccurrences(of: "{units}", with: urlSearchParams?.units ?? "metric")
         
@@ -74,9 +74,9 @@ class WeatherService: ServiceProviding {
         return try await NetworkManager(session: UserSession.activeSession).execute(request: request)
     }
     
-    func fetch<T>() throws -> AnyPublisher<T, NetworkError> where T : Decodable  {
+    func fetch<T>() -> AnyPublisher<T, NetworkError> where T : Decodable  {
         // Construct the request using makeRequest().
         let request = makeRequest()
-        return try NetworkManager(session: UserSession.activeSession).execute(request: request)
+        return NetworkManager(session: UserSession.activeSession).execute(request: request)
     }
 }

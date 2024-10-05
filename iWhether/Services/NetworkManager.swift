@@ -158,13 +158,14 @@ class NetworkManager: NSObject {
 }
 
 extension NetworkManager {
-    func execute<T: Decodable>(request: Request) throws -> AnyPublisher<T, NetworkError> {
+    func execute<T: Decodable>(request: Request) -> AnyPublisher<T, NetworkError> {
         
         // Encode the request path to ensure it is a valid URL.
         guard let path = request.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                 let url = URL(string: path) else {
             
-            throw NetworkError.invalidUrl
+            return Fail(error: NetworkError.invalidUrl)
+                    .eraseToAnyPublisher()
         }
         
         // Create a URLRequest with the encoded URL.

@@ -11,14 +11,31 @@ struct HourlyForecastView: View {
     @EnvironmentObject var viewModel: WeatherViewModel
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(viewModel.weather.hourly) { weather in
-                    let icon = Image((weather.weather.first?.icon ?? "sun").wIconName)
-                    let hour = weather.date.formattedHour
-                    let temp = weather.temperature.formattedTemperature
-                    
-                    HourlyForecastCellView(hour: hour, image: icon, temp: temp)
+        VStack {
+            // Today's weather summary
+            Text(viewModel.hourlyForecastForTheCurrentSession)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.white.opacity(0.9))
+                .padding(.all, 16)
+                
+            VStack {
+                Divider()
+                    .frame(minHeight: 1)
+                    .overlay(Color.gray)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 10)
+            
+            // Horizontal scrollable hourly view
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(viewModel.weather.hourly) { weather in
+                        let icon = Image((weather.weather.first?.icon ?? "sun").wIconName)
+                        let hour = weather.date.formattedHour
+                        let temp = weather.temperature.formattedTemperature
+                        
+                        HourlyForecastCellView(hour: hour, image: icon, temp: temp)
+                    }
                 }
             }
         }

@@ -16,11 +16,15 @@ struct DailyForecastView: View {
                 .font(.footnote)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.all, 10)
+                .padding(.horizontal, 16)
             
-            Divider()
-                .frame(minHeight: 1)
-                .background(Color.hourViewSeparator)
+            VStack {
+                Divider()
+                    .frame(minHeight: 1)
+                    .background(Color.hourViewSeparator)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 10)
             
             ForEach(viewModel.weather.daily) { weather in
                 LazyVStack {
@@ -28,6 +32,7 @@ struct DailyForecastView: View {
                 }
             }
         }
+        .padding(.top, 10)
         .background(
             RoundedRectangle(cornerRadius: 5)
                 .fill(
@@ -42,4 +47,5 @@ struct DailyForecastView: View {
 
 #Preview {
     DailyForecastView()
+        .environmentObject(WeatherViewModel())
 }

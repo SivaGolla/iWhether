@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum Constants {
     static let city = "London"
+    static let defaultCoordinates = CLLocationCoordinate2D(latitude: 51.5281798, longitude: -0.4312316)
 }

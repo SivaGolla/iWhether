@@ -30,11 +30,11 @@ struct CurrentConditionsView: View {
                 
                 HStack(spacing: 16) {
                     Text("H: \(viewModel.currentMaxTemp)°")
-                        .font(.title2)
+                        .font(.headline)
                         .foregroundColor(.secondaryText)
                     
                     Text("L: \(viewModel.currentMinTemp)°")
-                        .font(.title2)
+                        .font(.headline)
                         .foregroundColor(Color.secondaryText)
                 }
             }

@@ -53,7 +53,22 @@ extension WeatherViewModel {
     }
     
     var conditions: String {
-        return weather.current.weather.first?.main ?? ""
+        return weather.current.weather.first?.main ?? "Cloudy"
+    }
+    
+    var hourlyForecastForTheCurrentSession: String {
+        let hour = Int(weather.current.date.formattedHour) ?? 0
+        
+        var dayOrNightText = "tonight"
+        var morningOrNight = "morning"
+        if hour > 6 && hour < 18 {
+            dayOrNightText = "today"
+            morningOrNight = "night"
+        }
+        
+        let windSpeed = String(format: "%0.0f", weather.current.windSpeed)
+        
+        return "\(conditions) conditions \(dayOrNightText), continuing through the \(morningOrNight). Wind guts up to \(windSpeed) mph are making the temparature feel like \(feelsLike)º."
     }
 
     var windSpeed: String {
@@ -74,47 +89,42 @@ extension WeatherViewModel {
 }
 
 extension WeatherViewModel {
-    private func getLocation(city: String = "Reading") {
+    private func getLocation(city: String = "London") {
         CLGeocoder().geocodeAddressString(city) { (placemarks, error) in
             if let places = placemarks,
                let place = places.first {
-                Task {
-                    await self.fetchWeatherData(coord: place.location?.coordinate)
-                }
+                self.fetchWeatherData(coord: place.location?.coordinate)
             }
         }
     }
 
-    private func fetchWeatherData(coord: CLLocationCoordinate2D?) async {
-        let urlSearchParams = WeatherRequestModel(latitude: "\(coord?.latitude ?? 51.4514278)",
-                                                  longitude: "\(coord?.longitude ?? -1.078448)",
+    private func fetchWeatherData(coord: CLLocationCoordinate2D?) {
+        let urlSearchParams = WeatherRequestModel(latitude: "\(coord?.latitude ?? Constants.defaultCoordinates.latitude)",
+                                                  longitude: "\(coord?.longitude ?? Constants.defaultCoordinates.longitude)",
                                                   excludeFields: "minutely",
                                                   units: "metric")
-
+        
         // Create an instance of the WeatherService to make the network request.
         let serviceRequest = WeatherService()
         serviceRequest.urlSearchParams = urlSearchParams
-
+        
         loading = true
-        do {
-            // Attempt to fetch the APOD media using the service. The `fetch` function returns a `Result` object.
-            try serviceRequest.fetch()
-                .sink { [weak self] completion in
-                    self?.loading = false
-                    switch completion {
-                    case .finished:
-                        print("Success")
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                } receiveValue: { [weak self] result in
-                    self?.weather = result
-                }.store(in: &cancellables)
-
-        } catch let error as NSError {
-            // If an error occurs during the fetching process, print the error for debugging purposes,
-            // stop the loading animation, and show an error prompt to the user.
-            debugPrint(error.debugDescription)
-        }
+        
+        // Attempt to fetch the Weather data using the service. The `fetch` function returns a `Result` object.
+        serviceRequest.fetch()
+            .sink { [weak self] completion in
+                
+                self?.loading = false
+                
+                switch completion {
+                case .finished:
+                    print("Success")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+            } receiveValue: { [weak self] result in
+                self?.weather = result
+            }.store(in: &cancellables)
     }
 }
