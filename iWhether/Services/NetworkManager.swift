@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// A class responsible for managing network requests and handling responses.
 class NetworkManager: NSObject {
@@ -153,6 +154,69 @@ class NetworkManager: NSObject {
             // Handle other status codes as bad requests.
             throw NetworkError.badRequest
         }
+    }
+}
+
+extension NetworkManager {
+    func execute<T: Decodable>(request: Request) throws -> AnyPublisher<T, NetworkError> {
+        
+        // Encode the request path to ensure it is a valid URL.
+        guard let path = request.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                let url = URL(string: path) else {
+            
+            throw NetworkError.invalidUrl
+        }
+        
+        // Create a URLRequest with the encoded URL.
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.method.rawValue
+        urlRequest.addValue(request.contentType, forHTTPHeaderField: "Content-Type")
+        
+        // Add additional header parameters if provided.
+        if let headerParams = request.headerParams {
+            for (key, value) in headerParams {
+                urlRequest.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
+        // Set the body of the request if it is a POST request and the body is provided.
+        if request.method == .post, let body = request.body {
+            urlRequest.httpBody = body
+        }
+                
+        return activeSession.dataTaskPublisher(for: urlRequest)
+            .tryMap { (data: Data, response: URLResponse) in
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw NetworkError.internalServerError
+                }
+                
+                switch httpResponse.statusCode {
+                case 200...300:
+                    // Successful response range.
+                    return data
+                    
+                case 500...599:
+                    // Server error range.
+                    throw NetworkError.internalServerError
+                    
+                default:
+                    // Handle other status codes as bad requests.
+                    throw NetworkError.badRequest
+                }
+            }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .mapError { error -> NetworkError in
+                
+                switch error {
+                case let serviceError as NetworkError:
+                    return serviceError
+                default:
+                    return .parsingError
+                }
+            }
+            .eraseToAnyPublisher()
     }
 }
     

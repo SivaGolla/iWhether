@@ -8,30 +8,28 @@
 import SwiftUI
 
 struct DailyForecastCellView: View {
-    @ObservedObject var viewModel: WeatherViewModel
+    @EnvironmentObject var viewModel: WeatherViewModel
     var weather: WeatherDaily
     
     var body: some View {
         HStack {
             HStack {
-                Text(viewModel.getDayFor(weather.date).uppercased())
+                Text(weather.date.formattedDay.uppercased())
                     .frame(width: 50)
-                Text(viewModel.getDayNumber(weather.date))
+                Text(weather.date.formattedDayValue)
             }
             Spacer()
             Image(viewModel.weatherIconNameFor(weather: weather))
                 .resizable()
                 .scaledToFill()
-                .frame(width: 30,
-                       height: 30,
-                       alignment: .center)
+                .frame(width: 30, height: 30, alignment: .center)
             Spacer()
             HStack {
                 Image("cold")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20)
-                Text("\(viewModel.getTempFor(weather.temperature.min))°C")
+                Text("\(weather.temperature.min.formattedTemperature)°C")
             }
             Spacer()
             HStack {
@@ -39,7 +37,7 @@ struct DailyForecastCellView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20)
-                Text("\(viewModel.getTempFor(weather.temperature.max))°C")
+                Text("\(weather.temperature.max.formattedTemperature)°C")
             }
         }
         .font(.body)
@@ -67,5 +65,5 @@ struct DailyForecastCellView: View {
 }
 
 #Preview {
-    DailyForecastCellView(viewModel: WeatherViewModel(), weather: WeatherDaily())
+    DailyForecastCellView(weather: WeatherDaily())
 }

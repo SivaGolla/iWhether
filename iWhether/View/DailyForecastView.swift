@@ -24,12 +24,10 @@ struct DailyForecastView: View {
             
             ForEach(viewModel.weather.daily) { weather in
                 LazyVStack {
-                    DailyForecastCellView(viewModel: viewModel, weather: weather)
+                    DailyForecastCellView(weather: weather)
                 }
             }
         }
-//        .background(Color.hourCellBg)
-//        .cornerRadius(8.0)
         .background(
             RoundedRectangle(cornerRadius: 5)
                 .fill(

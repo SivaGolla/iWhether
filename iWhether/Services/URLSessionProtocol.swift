@@ -56,6 +56,8 @@ protocol URLSessionProtocol {
     /// - Returns: A URLSessionDownloadTaskProtocol that can be used to start the request.
     ///
     func downloadTask(with url: URL, completionHandler: @escaping @Sendable (URL?, URLResponse?, (any Error)?) -> Void) -> URLSessionDownloadTaskProtocol
+    
+    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
 }
 
 /// Extension to conform URLSession to the URLSessionProtocol, enabling the use of URLSession in a testable way.

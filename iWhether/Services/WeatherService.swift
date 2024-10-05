@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// Service for interacting with the Media of the Day API.
 ///
@@ -15,7 +16,7 @@ class WeatherService: ServiceProviding {
     
     /// Search parameters for the Media of the Day request.
     var urlSearchParams: WeatherRequestModel?
-    
+        
     // MARK: - ServiceProviding Methods
     
     /// Constructs a Request object based on the search parameters.
@@ -26,25 +27,10 @@ class WeatherService: ServiceProviding {
         var reqUrlPath = Environment.wForecast
         
         // Append query parameters to the base URL if they exist.
-        if let requestParams = urlSearchParams {
-            
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{latitude}", with: requestParams.latitude)
-            
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{longitude}", with: requestParams.longitude)
-            
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{excludeFields}", with: requestParams.excludeFields)
-            
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{units}", with: requestParams.units)
-            
-//            let excludeFields = "minutely"
-//            metric
-            
-        } else {
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{latitude}", with: "51.4514278")
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{longitude}", with: "-1.078448")
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{excludeFields}", with: "minutely")
-            reqUrlPath = reqUrlPath.replacingOccurrences(of: "{units}", with: "metric")
-        }
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{latitude}", with: urlSearchParams?.latitude ?? "51.4514278")
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{longitude}", with: urlSearchParams?.longitude ?? "-1.078448")
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{excludeFields}", with: urlSearchParams?.excludeFields ?? "minutely")
+        reqUrlPath = reqUrlPath.replacingOccurrences(of: "{units}", with: urlSearchParams?.units ?? "metric")
         
         // Create and return a Request object with the constructed URL path.
         let request = Request(
@@ -86,5 +72,11 @@ class WeatherService: ServiceProviding {
         
         // Execute the request using NetworkManager.
         return try await NetworkManager(session: UserSession.activeSession).execute(request: request)
+    }
+    
+    func fetch<T>() throws -> AnyPublisher<T, NetworkError> where T : Decodable  {
+        // Construct the request using makeRequest().
+        let request = makeRequest()
+        return try NetworkManager(session: UserSession.activeSession).execute(request: request)
     }
 }

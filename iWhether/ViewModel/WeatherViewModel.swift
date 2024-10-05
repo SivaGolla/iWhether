@@ -8,9 +8,13 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import Combine
 
 final class WeatherViewModel: ObservableObject {
     @Published var weather: WeatherResponse = WeatherResponse()
+    @Published var loading: Bool = false
+    private var cancellables: Set<AnyCancellable> = []
+    
     var city = Constants.city {
         didSet {
             getLocation()
@@ -33,19 +37,19 @@ extension WeatherViewModel {
     }
 
     var temperature: String {
-        return getTempFor(weather.current.temperature)
+        return weather.current.temperature.formattedTemperature
     }
     
     var currentMinTemp: String {
-        return getTempFor(todayForecast?.temperature.min ?? 0)
+        return (todayForecast?.temperature.min ?? 0).formattedTemperature
     }
     
     var currentMaxTemp: String {
-        return getTempFor(todayForecast?.temperature.max ?? 0)
+        return (todayForecast?.temperature.max ?? 0).formattedTemperature
     }
 
     var feelsLike: String {
-        return getTempFor(weather.current.feelsLike)
+        return (weather.current.feelsLike).formattedTemperature
     }
     
     var conditions: String {
@@ -64,22 +68,6 @@ extension WeatherViewModel {
         return String(format: "%0.1f%%", weather.current.dewPoint)
     }
 
-    func getTimeFor(_ temp: Double) -> String {
-        return DateFormatter.wTime.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
-    }
-
-    func getDayFor(_ temp: Double) -> String {
-        return DateFormatter.wDay.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
-    }
-    
-    func getDayNumber(_ temp: Double) -> String {
-        return DateFormatter.wDateValue.string(from: Date(timeIntervalSince1970: TimeInterval(temp)))
-    }
-
-    func getTempFor(_ temp: Double) -> String {
-        return String(format: "%1.0f", temp)
-    }
-    
     func weatherIconNameFor(weather: WeatherDaily) -> String {
         return (weather.weather.first?.icon ?? "sun").wIconName
     }
@@ -107,9 +95,21 @@ extension WeatherViewModel {
         let serviceRequest = WeatherService()
         serviceRequest.urlSearchParams = urlSearchParams
 
+        loading = true
         do {
             // Attempt to fetch the APOD media using the service. The `fetch` function returns a `Result` object.
-            weather = try await serviceRequest.fetch()
+            try serviceRequest.fetch()
+                .sink { [weak self] completion in
+                    self?.loading = false
+                    switch completion {
+                    case .finished:
+                        print("Success")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { [weak self] result in
+                    self?.weather = result
+                }.store(in: &cancellables)
 
         } catch let error as NSError {
             // If an error occurs during the fetching process, print the error for debugging purposes,

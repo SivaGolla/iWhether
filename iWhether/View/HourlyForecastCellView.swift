@@ -1,5 +1,5 @@
 //
-//  HourlyCellView.swift
+//  HourlyForecastCellView.swift
 //  iWeather
 //
 //  Created by Venkata Sivannarayana Golla on 02/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HourlyCellView: View {
+struct HourlyForecastCellView: View {
     var hour: String, image: Image, temp: String
     
     var body: some View {
@@ -26,5 +26,5 @@ struct HourlyCellView: View {
 }
 
 #Preview {
-    HourlyCellView(hour: "00", image: Image(""), temp: "")
+    HourlyForecastCellView(hour: "00", image: Image(""), temp: "")
 }
