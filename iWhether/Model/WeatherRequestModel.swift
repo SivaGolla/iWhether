@@ -8,6 +8,7 @@
 import Foundation
 
 struct WeatherRequestModel: Decodable {
+    let city: String
     let latitude: String
     let longitude: String
     let excludeFields: String

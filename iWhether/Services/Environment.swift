@@ -72,4 +72,7 @@ extension Environment {
     /// Ex: https://api.nasa.gov/planetary/apod?api_key=xSq3ugePAFtrj2BQik6JMED9AofRhzFAmKuJIJbZ
     ///
     static let wForecast = Environment.current.baseUrlPath + "/onecall?lat={latitude}&lon={longitude}&appid=\(Environment.current.apiKey)&exclude={excludeFields}&units=metric"
+    
+    // Todo
+    static let validateCity = Environment.current.baseUrlPath + "/weather?q={CityID}&appid=\(Environment.current.apiKey)"
 }

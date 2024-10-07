@@ -8,29 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var weatherViewModel = WeatherViewModel()
-    
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack {
-                VStack(spacing: 0) {
-                    ScrollView(showsIndicators: false) {
-                        WeatherContainerView()
-                            .padding(.top, Spacing.defaultPadding)
-                            .environmentObject(weatherViewModel)
-                    }
-                    .edgesIgnoringSafeArea(.all)
-                    .padding(.top, 2)
-                }
-                .background(Color.meduimBlueColor)
-                
-                // Bottom View
-                BottomOptionsView()
-            }.background(Color.meduimBlueColor)
-            
-        }
-        .onAppear {
-            weatherViewModel.city = Constants.city
+            HomeView()
         }
     }
 }

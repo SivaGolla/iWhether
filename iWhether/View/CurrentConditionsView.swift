@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CurrentConditionsView: View {
-    @EnvironmentObject var viewModel: WeatherViewModel
+    @ObservedObject var viewModel: WeatherViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -44,5 +44,5 @@ struct CurrentConditionsView: View {
 }
 
 #Preview {
-    CurrentConditionsView()
+    CurrentConditionsView(viewModel: WeatherViewModel(city: "London"))
 }

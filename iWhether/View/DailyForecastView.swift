@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DailyForecastView: View {
-    @EnvironmentObject var viewModel: WeatherViewModel
+    @ObservedObject var viewModel: WeatherViewModel
     
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct DailyForecastView: View {
             
             ForEach(viewModel.weather.daily) { weather in
                 LazyVStack {
-                    DailyForecastCellView(weather: weather)
+                    DailyForecastCellView(viewModel: viewModel, weather: weather)
                 }
             }
         }
@@ -46,6 +46,5 @@ struct DailyForecastView: View {
 }
 
 #Preview {
-    DailyForecastView()
-        .environmentObject(WeatherViewModel())
+    DailyForecastView(viewModel: WeatherViewModel(city: "London"))
 }

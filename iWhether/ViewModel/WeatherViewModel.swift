@@ -15,10 +15,16 @@ final class WeatherViewModel: ObservableObject {
     @Published var loading: Bool = false
     private var cancellables: Set<AnyCancellable> = []
     
+    private var coordinates: CLLocationCoordinate2D?
     var city = Constants.city {
         didSet {
-            getLocation()
+            ExtractCityCoordinates()
         }
+    }
+    
+    init(city: String) {
+        self.city = city
+        ExtractCityCoordinates()
     }
 }
 
@@ -89,18 +95,19 @@ extension WeatherViewModel {
 }
 
 extension WeatherViewModel {
-    private func getLocation(city: String = "London") {
+    private func ExtractCityCoordinates(city: String = "London") {
         CLGeocoder().geocodeAddressString(city) { (placemarks, error) in
             if let places = placemarks,
                let place = places.first {
-                self.fetchWeatherData(coord: place.location?.coordinate)
+                self.coordinates = place.location?.coordinate
             }
         }
     }
 
-    private func fetchWeatherData(coord: CLLocationCoordinate2D?) {
-        let urlSearchParams = WeatherRequestModel(latitude: "\(coord?.latitude ?? Constants.defaultCoordinates.latitude)",
-                                                  longitude: "\(coord?.longitude ?? Constants.defaultCoordinates.longitude)",
+    func fetchWeatherData() {
+        let urlSearchParams = WeatherRequestModel(city: city,
+                                                  latitude: "\(coordinates?.latitude ?? Constants.defaultCoordinates.latitude)",
+                                                  longitude: "\(coordinates?.longitude ?? Constants.defaultCoordinates.longitude)",
                                                   excludeFields: "minutely",
                                                   units: "metric")
         

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DailyForecastCellView: View {
-    @EnvironmentObject var viewModel: WeatherViewModel
+    @ObservedObject var viewModel: WeatherViewModel
     var weather: WeatherDaily
     
     var body: some View {
@@ -65,5 +65,5 @@ struct DailyForecastCellView: View {
 }
 
 #Preview {
-    DailyForecastCellView(weather: WeatherDaily())
+    DailyForecastCellView(viewModel: WeatherViewModel(city: "London"), weather: WeatherDaily())
 }
