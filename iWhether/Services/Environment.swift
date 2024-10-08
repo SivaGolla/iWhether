@@ -55,9 +55,9 @@ extension Environment {
     var apiKey: String {
         switch self {
         case .prod:
-            return ""  // API key for production environment.
+            return "api-key"  // API key for production environment.
         default:
-            return ""  // API key for development and UAT environments.
+            return "api-key"  // API key for development and UAT environments.
         }
     }
 }
@@ -66,10 +66,10 @@ extension Environment {
 // MARK: All Service Endpoints
 extension Environment {
     
-    /// A static constant that constructs the full APOD API endpoint for the current environment.
+    /// A static constant that constructs the Weather Forecast API endpoint for the current environment.
     /// This combines the base URL and API key to create a complete URL for making requests.
     ///
-    /// Ex: https://api.nasa.gov/planetary/apod?api_key=xSq3ugePAFtrj2BQik6JMED9AofRhzFAmKuJIJbZ
+    /// Ex: https://api.openweathermap.org/data/3.0/onecall?lat=51.5281798&lon=-0.4312316&exclude=minutely&appid=api-key
     ///
     static let wForecast = Environment.current.baseUrlPath + "/onecall?lat={latitude}&lon={longitude}&appid=\(Environment.current.apiKey)&exclude={excludeFields}&units=metric"
     

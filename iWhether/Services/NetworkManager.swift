@@ -185,7 +185,7 @@ extension NetworkManager {
             urlRequest.httpBody = body
         }
                 
-        return activeSession.dataTaskPublisher(for: urlRequest)
+        return activeSession.dataTaskAPublisher(for: urlRequest)
             .tryMap { (data: Data, response: URLResponse) in
                 
                 guard let httpResponse = response as? HTTPURLResponse else {

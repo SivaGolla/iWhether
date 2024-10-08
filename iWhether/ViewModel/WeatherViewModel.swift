@@ -30,8 +30,10 @@ final class WeatherViewModel: ObservableObject {
 
 extension WeatherViewModel {
     private var todayForecast: WeatherDaily? {
-        let date = weather.current.date
-        return weather.daily.first { $0.date == date }
+        var date = Date(timeIntervalSince1970: weather.current.date)
+        let dateText = date.formatted(date: .numeric, time: .omitted)
+        
+        return weather.daily.first { Date(timeIntervalSince1970: $0.date).formatted(date: .numeric, time: .omitted) == dateText }
     }
     
     var date: String {
@@ -67,6 +69,7 @@ extension WeatherViewModel {
         
         var dayOrNightText = "tonight"
         var morningOrNight = "morning"
+        
         if hour > 6 && hour < 18 {
             dayOrNightText = "today"
             morningOrNight = "night"

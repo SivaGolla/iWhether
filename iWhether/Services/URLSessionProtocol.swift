@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// A protocol abstraction for URLSession, allowing for better testability by enabling mocking of network requests.
 protocol URLSessionProtocol {
@@ -57,7 +58,10 @@ protocol URLSessionProtocol {
     ///
     func downloadTask(with url: URL, completionHandler: @escaping @Sendable (URL?, URLResponse?, (any Error)?) -> Void) -> URLSessionDownloadTaskProtocol
     
-    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
+    typealias APIResponse = URLSession.DataTaskPublisher.Output
+    func dataTaskAPublisher(for request: URLRequest) -> AnyPublisher<APIResponse, URLError>
+    
+//    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
 }
 
 /// Extension to conform URLSession to the URLSessionProtocol, enabling the use of URLSession in a testable way.
@@ -106,6 +110,10 @@ extension URLSession: URLSessionProtocol {
     
     func downloadTask(with url: URL, completionHandler: @escaping @Sendable (URL?, URLResponse?, (any Error)?) -> Void) -> URLSessionDownloadTaskProtocol {
         return downloadTask(with: url, completionHandler: completionHandler) as URLSessionDownloadTask
+    }
+    
+    func dataTaskAPublisher(for request: URLRequest) -> AnyPublisher<APIResponse, URLError> {
+        return dataTaskPublisher(for: request).eraseToAnyPublisher()
     }
 }
 

@@ -31,4 +31,10 @@ extension DateFormatter {
         formatter.dateFormat = "hh a"
         return formatter
     }()
+    
+    static let today: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }

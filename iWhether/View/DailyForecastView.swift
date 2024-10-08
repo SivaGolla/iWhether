@@ -12,7 +12,7 @@ struct DailyForecastView: View {
     
     var body: some View {
         VStack {
-            Label("5-Day Forecast: ", systemImage: "calendar")
+            Label("8-Day Forecast: ", systemImage: "calendar")
                 .font(.footnote)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
