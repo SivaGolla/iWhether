@@ -75,6 +75,18 @@ This application follows the MVVM (Model-View-ViewModel) design pattern, which h
 | `exclude` | `string` | **Optional**. It should be a comma-delimited list (without spaces). Available values: current, minutely, hourly, daily, alerts |
 | `units`   | `string` | **Optional**. Units of measurement. standard, metric and imperial units are available |
 
+```swift
+    Change the apiKey to have a valid api-key in Environment.swift
+     
+    var apiKey: String {
+        switch self {
+        case .prod:
+            return "api-key"  // API key for production environment.
+        default:
+            return "api-key"  // API key for development and UAT environments.
+        }
+    }
+```
 ## Networking
 
 The `NetworkManager` class handles all networking tasks, including fetching weather data from the OpenWeather API. It supports:

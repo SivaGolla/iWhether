@@ -55,9 +55,9 @@ extension Environment {
     var apiKey: String {
         switch self {
         case .prod:
-            return "8bca7b0ba6dc95f94e8ed9960c27b3df"  // API key for production environment.
+            return "api-key"  // API key for production environment.
         default:
-            return "8bca7b0ba6dc95f94e8ed9960c27b3df"  // API key for development and UAT environments.
+            return "api-key"  // API key for development and UAT environments.
         }
     }
 }
