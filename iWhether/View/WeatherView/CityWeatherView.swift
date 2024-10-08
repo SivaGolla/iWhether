@@ -30,7 +30,7 @@ struct CityWeatherView: View {
                     
                     // Weather container that displays the weather information.
                     WeatherContainerView(viewModel: viewModel)
-                        .padding(.top, Spacing.defaultPadding)
+                        .padding(.vertical, Spacing.defaultPadding)
                 }
                 .edgesIgnoringSafeArea(.all)
                 .padding(.top, 2)
