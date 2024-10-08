@@ -98,6 +98,16 @@ class NetworkManager: NSObject {
         return task
     }
     
+    /// Executes a network request and decodes the response into the specified `Decodable` type.
+    ///
+    /// - Parameter request: A `Request` object containing the necessary details for the network request (e.g., path, HTTP method, headers, and body).
+    /// - Returns: The decoded response of type `T`, which must conform to the `Decodable` protocol.
+    /// - Throws:
+    ///   - `NetworkError.invalidUrl`: If the request URL cannot be encoded or constructed.
+    ///   - `NetworkError.parsingError`: If the response data cannot be decoded into the expected type.
+    ///   - `NetworkError.internalServerError`: If the server returns a status code between 500 and 599.
+    ///   - `NetworkError.badRequest`: If the response status code indicates a bad request or another error.
+    ///
     func execute<T: Decodable>(request: Request) async throws -> T {
         
         // Encode the request path to ensure it is a valid URL.
@@ -158,14 +168,25 @@ class NetworkManager: NSObject {
 }
 
 extension NetworkManager {
+    
+    /// Executes a network request and decodes the response into the specified `Decodable` type using Combine framework.
+    ///
+    /// - Parameter request: A `Request` object containing the details for the network request (URL path, HTTP method, headers, and body).
+    /// - Returns: A publisher that outputs a decoded object of type `T` on success, or a `NetworkError` on failure.
+    /// - Throws:
+    ///   - `NetworkError.invalidUrl`: If the request URL is invalid or cannot be encoded.
+    ///   - `NetworkError.internalServerError`: If the server returns a status code between 500 and 599.
+    ///   - `NetworkError.badRequest`: If the response status code is outside the 200...300 range or another error occurs.
+    ///   - `NetworkError.parsingError`: If the response data cannot be decoded into the expected type.
+    ///
     func execute<T: Decodable>(request: Request) -> AnyPublisher<T, NetworkError> {
         
         // Encode the request path to ensure it is a valid URL.
         guard let path = request.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                let url = URL(string: path) else {
+              let url = URL(string: path) else {
             
             return Fail(error: NetworkError.invalidUrl)
-                    .eraseToAnyPublisher()
+                .eraseToAnyPublisher()
         }
         
         // Create a URLRequest with the encoded URL.
@@ -184,10 +205,12 @@ extension NetworkManager {
         if request.method == .post, let body = request.body {
             urlRequest.httpBody = body
         }
-                
+        
+        // Use the session to create a data task publisher.
         return activeSession.dataTaskAPublisher(for: urlRequest)
             .tryMap { (data: Data, response: URLResponse) in
                 
+                // Ensure the response is an HTTPURLResponse to get access to the status code.
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw NetworkError.internalServerError
                 }
@@ -206,8 +229,13 @@ extension NetworkManager {
                     throw NetworkError.badRequest
                 }
             }
+            // Decode the response data into the expected Decodable type `T`.
             .decode(type: T.self, decoder: JSONDecoder())
+        
+            // Ensure that the result is delivered on the main thread.
             .receive(on: DispatchQueue.main)
+        
+            // Map any errors into a custom NetworkError.
             .mapError { error -> NetworkError in
                 
                 switch error {
@@ -217,6 +245,8 @@ extension NetworkManager {
                     return .parsingError
                 }
             }
+        
+            // Return the publisher with an erased type (AnyPublisher) to hide the implementation details.
             .eraseToAnyPublisher()
     }
 }

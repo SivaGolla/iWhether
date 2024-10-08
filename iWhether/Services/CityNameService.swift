@@ -8,13 +8,13 @@
 import Foundation
 import Combine
 
-/// Service for interacting with the Media of the Day API.
+/// Service for interacting with the Weather Forecast API.
 ///
 class CityNameService: ServiceProviding {
     
     // MARK: - Properties
     
-    /// Search parameters for the Media of the Day request.
+    /// Query parameters for the Weather Forecast request.
     var urlSearchParams: WeatherRequestModel?
         
     // MARK: - ServiceProviding Methods

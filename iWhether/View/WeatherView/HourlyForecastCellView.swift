@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/// A view representing an individual hourly forecast cell.
+///
+/// This view displays the hour, weather icon, and temperature for a specific time in the hourly forecast.
+/// 
 struct HourlyForecastCellView: View {
     var hour: String, image: Image, temp: String
     

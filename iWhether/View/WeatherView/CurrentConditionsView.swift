@@ -7,7 +7,13 @@
 
 import SwiftUI
 
+/// A view that displays the current weather conditions for a specified city.
+///
+/// This view shows the city name, current temperature, feels-like temperature, and temperature highs/lows.
+///
 struct CurrentConditionsView: View {
+    
+    // ObservedObject that holds the WeatherViewModel instance to manage the current weather data.
     @ObservedObject var viewModel: WeatherViewModel
     
     var body: some View {
@@ -23,6 +29,7 @@ struct CurrentConditionsView: View {
                 .lineLimit(1) // Ensure the text stays on one line
                 .foregroundColor(.white)
             
+            // Displays additional weather information.
             VStack(spacing: -5) {
                 Text("Feels Like: \(viewModel.feelsLike)°")
                     .font(.title3)
@@ -37,7 +44,7 @@ struct CurrentConditionsView: View {
                         .font(.headline)
                         .foregroundColor(Color.secondaryText)
                 }
-            }
+            } // End: VStack - additional weather information.
         }
         .padding(.bottom, 20)
     }

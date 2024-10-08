@@ -7,8 +7,12 @@
 
 import SwiftUI
 
+/// A view that represents a single day's weather forecast.
+///
+/// This view displays the minimum and maximum temperatures, the day of the week,
+/// and the corresponding weather icon for a specific day.
+///
 struct DailyForecastCellView: View {
-    @ObservedObject var viewModel: WeatherViewModel
     var weather: WeatherDaily
     
     var body: some View {
@@ -19,7 +23,7 @@ struct DailyForecastCellView: View {
                 Text(weather.date.formattedDayValue)
             }
             Spacer()
-            Image(viewModel.weatherIconNameFor(weather: weather))
+            Image(Utils.iconNameFor(weather: weather))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 30, height: 30, alignment: .center)
@@ -65,5 +69,5 @@ struct DailyForecastCellView: View {
 }
 
 #Preview {
-    DailyForecastCellView(viewModel: WeatherViewModel(city: "London"), weather: WeatherDaily())
+    DailyForecastCellView(weather: WeatherDaily())
 }

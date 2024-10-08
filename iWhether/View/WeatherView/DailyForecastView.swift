@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+/// A view that displays the daily weather forecast.
+///
+/// This view provides an 8-day weather forecast using the data from the WeatherViewModel.
+///
 struct DailyForecastView: View {
+    
+    // The view model containing the weather data for the view.
     @ObservedObject var viewModel: WeatherViewModel
     
+    // Title for the forecast section
     var body: some View {
         VStack {
             Label("8-Day Forecast: ", systemImage: "calendar")
@@ -26,9 +33,10 @@ struct DailyForecastView: View {
             .padding(.horizontal)
             .padding(.bottom, 10)
             
+            // For each day's forecast, create a cell view
             ForEach(viewModel.weather.daily) { weather in
                 LazyVStack {
-                    DailyForecastCellView(viewModel: viewModel, weather: weather)
+                    DailyForecastCellView(weather: weather)
                 }
             }
         }

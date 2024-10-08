@@ -7,7 +7,12 @@
 
 import SwiftUI
 
+/// A view that displays the hourly weather forecast.
+///
+/// This view shows a summary of today's weather along with hourly weather data in a horizontal scrollable format.
+///
 struct HourlyForecastView: View {
+    // ObservedObject that holds the WeatherViewModel instance to manage the hourly weather data.
     @ObservedObject var viewModel: WeatherViewModel
     
     var body: some View {
@@ -26,14 +31,17 @@ struct HourlyForecastView: View {
             .padding(.horizontal)
             .padding(.bottom, 10)
             
-            // Horizontal scrollable hourly view
+            // Horizontal scrollable view for hourly weather
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(viewModel.weather.hourly) { weather in
+                        
+                        // Populates weather icon, hour, and temperature for display
                         let icon = Image((weather.weather.first?.icon ?? "sun").wIconName)
                         let hour = weather.date.formattedHour
                         let temp = weather.temperature.formattedTemperature
                         
+                        // Creates an hourly forecast cell view for each hour's data
                         HourlyForecastCellView(hour: hour, image: icon, temp: temp)
                     }
                 }

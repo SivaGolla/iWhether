@@ -108,10 +108,24 @@ extension URLSession: URLSessionProtocol {
         return try await data(from: url)
     }
     
+    /// Creates a download task that retrieves the contents of a URL and calls the completion handler upon completion.
+    ///
+    /// - Parameters:
+    ///   - url: The `URL` to download the data from.
+    ///   - completionHandler: A closure that is executed when the download completes.
+    ///     - Parameters of the closure:
+    ///       - fileURL: The location of the downloaded file on disk. This can be `nil` if the download fails.
+    ///       - response: The `URLResponse` received from the server. This can be used to check the status and headers of the response.
+    ///       - error: An optional error indicating why the download failed. This will be `nil` if the download succeeded.
+    /// - Returns: A `URLSessionDownloadTaskProtocol` that represents the download task, allowing you to start, pause, or cancel the task.
     func downloadTask(with url: URL, completionHandler: @escaping @Sendable (URL?, URLResponse?, (any Error)?) -> Void) -> URLSessionDownloadTaskProtocol {
         return downloadTask(with: url, completionHandler: completionHandler) as URLSessionDownloadTask
     }
     
+    /// Creates a publisher that wraps a URL session data task for the provided URL request.
+    ///
+    /// - Parameter request: The `URLRequest` to be executed.
+    /// - Returns: An `AnyPublisher` that emits an `APIResponse` and completes, or emits a `URLError` on failure.
     func dataTaskAPublisher(for request: URLRequest) -> AnyPublisher<APIResponse, URLError> {
         return dataTaskPublisher(for: request).eraseToAnyPublisher()
     }

@@ -50,7 +50,7 @@ extension Environment {
     }
     
     /// A computed property that returns the API key for the current environment.
-    /// The API key is used to authenticate requests to the NASA APOD API.
+    /// The API key is used to authenticate requests to the Weather Forecast API.
     ///
     var apiKey: String {
         switch self {
